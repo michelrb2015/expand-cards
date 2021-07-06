@@ -1,0 +1,18 @@
+@mixin init-friends-panels($friends: ()) {
+    @each $name, $url in $friends {
+        $i: index($friends, $name $url);
+        .panel:nth-child(#{$i}) {
+          background-image: $url;
+        }
+      }
+
+}
+
+@mixin hide-last($cant){
+    @for $i from 1 to $cant+1 {
+        .panel:nth-last-of-type(#{$i}){
+            display: none;
+        }
+    }
+
+}

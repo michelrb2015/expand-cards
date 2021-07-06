@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+@import "./src/styles/mixins";
+
+$font-family: "Mulish", sans-serif;
+$base-url: "assets/Friends/";
+
+$friends-url: (
+  "phoebe": url($base-url + "phoebe.jpg"),
+  "joey": url($base-url + "joey.jpg"),
+  "ross": url($base-url + "ross.jpg"),
+  "rachel": url($base-url + "rachel.jpg"),
+  "chandler": url($base-url + "chandler.jpg"),
+  "monica": url($base-url + "monica.png"),
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+
+  .container {
+    display: flex;
+    width: 90vw;
+    @include init-friends-panels($friends-url);
+
+    .panel {
+      background-size: cover;
+      background-position: top;
+      background-repeat: no-repeat;
+      height: 85vh;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      flex: 0.8;
+      margin: 10px;
+      position: relative;
+      transition: flex 0.7s ease-in;
+
+      h3 {
+        font-size: 24px;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        margin: 0;
+        opacity: 0;
+      }
+      &.active {
+        flex: 3;
+        h3 {
+          opacity: 1;
+          transition: opacity 0.3s ease-in 0.4s;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    @include hide-last(4);
+  }
+  @media (max-width: 768px) {
+    @include hide-last(3);
+  }
+  @media (max-width: 991px) {
+    @include hide-last(2);
+  }
+}
